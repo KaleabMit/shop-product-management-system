@@ -1,0 +1,28 @@
+.footer-section {
+  background-color: #f4f7fa;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.social-icons .social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #2ecc71, #27ae60);
+  color: white;
+  font-size: 18px;
+  transition: background 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons .social-btn:hover {
+  background: linear-gradient(to right, #27ae60, #2ecc71);
+}
+
+.copyright-text {
+  font-weight: 500;
+  font-size: 14px;
+}

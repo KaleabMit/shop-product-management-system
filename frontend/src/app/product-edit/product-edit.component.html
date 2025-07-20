@@ -1,0 +1,32 @@
+<ng-container *ngIf="product">
+    <p-toast position="bottom-center"></p-toast>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Edit Product</h1>
+            <hr>
+        </div>
+    </div>
+
+    <form (ngSubmit)="updateProduct()">
+        <div class="row">
+            <!-- Left Side -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="productname">Product</label>
+                    <input type="text" id="productname" class="form-control" [(ngModel)]="product.productname"
+                        name="productname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" class="form-control" [(ngModel)]="product.price" name="price"
+                        required>
+                </div>
+
+                <div class="my-3">
+                    <button type="submit" class="btn btn-warning">Update Product</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

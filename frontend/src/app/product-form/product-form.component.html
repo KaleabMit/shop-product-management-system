@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container py-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body px-5 py-4">
+      <h3 class="mb-4 text-center text-primary fw-bold">
+        <i class="pi pi-shopping-cart me-2"></i> Add New Product
+      </h3>
+
+      <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <label for="inputProductName" class="form-label fw-semibold">Product Name</label>
+            <input class="form-control rounded-3" id="inputProductName" type="text"
+              placeholder="e.g. Mitku Coffee" ngModel name="productname" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputPrice" class="form-label fw-semibold">Product Price</label>
+            <input class="form-control rounded-3" id="inputPrice" type="number"
+              placeholder="e.g. 250" ngModel name="price" required />
+          </div>
+        </div>
+
+        <div class="text-center mt-5">
+          <button class="btn btn-success px-5 py-2 rounded-pill shadow-sm" type="submit">
+            <i class="pi pi-save me-2"></i>Save Product
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Show product list below -->
+<app-product-list></app-product-list>

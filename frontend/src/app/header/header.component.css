@@ -1,0 +1,120 @@
+/* Base header styling */
+.header {
+  background-color: #374c6a;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.sitename {
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Navigation */
+.navmenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navmenu ul li {
+  position: relative;
+}
+
+.navmenu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.navmenu a.active,
+.navmenu a:hover {
+  color: #4fc3f7;
+}
+
+/* Dropdown styles */
+.navmenu .dropdown > a {
+  display: flex;
+  align-items: center;
+}
+
+.navmenu .dropdown ul {
+  display: none;
+  position: absolute;
+  background-color: #445b7b;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  padding: 10px 0;
+  min-width: 200px;
+  border-radius: 4px;
+}
+
+.navmenu .dropdown:hover > ul {
+  display: block;
+}
+
+.navmenu .dropdown ul li {
+  padding: 0;
+}
+
+.navmenu .dropdown ul a {
+  padding: 10px 20px;
+  display: block;
+  color: white;
+  white-space: nowrap;
+}
+
+/* Nested dropdown */
+.navmenu .dropdown ul .dropdown:hover > ul {
+  display: block;
+  top: 0;
+  left: 100%;
+}
+
+/* Search + profile section */
+.header-right {
+  gap: 10px;
+}
+
+.search-group {
+  background-color: white;
+  border-radius: 6px;
+  padding: 2px;
+  height: 38px;
+}
+
+.search-input {
+  border: none;
+  padding: 5px 10px;
+  outline: none;
+  box-shadow: none;
+  border-radius: 6px 0 0 6px;
+}
+
+.btn-search {
+  background-color: transparent;
+  border: none;
+  color: #374c6a;
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.btn-user {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.dropdown-menu {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
