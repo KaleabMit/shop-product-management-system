@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: node dist/main
+    envVars:
+      - key: PORT
+        value: 5000
+
+  - type: static
+    name: frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build --configuration production
+    staticPublishPath: dist/frontend
