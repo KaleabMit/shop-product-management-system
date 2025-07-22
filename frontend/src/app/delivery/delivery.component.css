@@ -1,97 +1,23 @@
-.main {
-  background-color: #fefefe;
-  min-height: 100vh;
-  display: flex;
-  justify-content: flex-start; /* Align content to the left */
-  align-items: flex-start;     /* Align items to top */
-  font-family: 'Georgia', serif;
-  padding: 40px 60px;          /* Add spacing around content */
-  flex-direction: column;
-}
-
-.section-title {
-  text-align: left;           /* Left-align heading text */
-  position: relative;
-  padding-bottom: 30px;
-  width: 100%;
-}
-
-.top-label {
-  position: absolute;
-  top: 10px;
-  left: 0;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: #555;
-  line-height: 1.2;
-}
-
-.price-title {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.price-script {
-  font-family: 'Brush Script MT', cursive;
-  font-weight: normal;
-}
-
-.price-sans {
-  font-family: 'Arial', sans-serif;
-  font-weight: normal;
-}
-
-.search-box {
-  margin: 20px 0;
-  text-align: left;
-  width: 100%;
-}
-
-.search-box input {
-  width: 50%;
-  display: inline-block;
-}
-
-.subtext {
-  color: #666;
-  font-size: 0.95rem;
-  margin-top: 10px;
-  text-align: left;
-}
-
 .price-item {
-  font-size: 1.2rem;
-  padding: 15px;
-  border-bottom: 1px solid #eee;
-  font-family: 'Courier New', monospace;
-  text-transform: uppercase;
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.card {
+  border-radius: 12px;
+  border: none;
+}
+
+.btn-sm {
+  min-width: 100px;
+}
+
+input[type="number"] {
+  max-width: 80px;
+  margin-left: 10px;
 }
 
 .product-name {
   flex: 1;
-  text-align: left;
 }
 
-.product-price {
-  margin-left: 20px;
-  font-weight: bold;
-}
-
-.actions {
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-}
-
-.footer-label {
-  margin-top: 40px;
-  font-size: 0.9rem;
-  color: #888;
-  text-align: left;
-  width: 100%;
-}
