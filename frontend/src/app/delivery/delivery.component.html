@@ -1,27 +1,54 @@
 <app-header></app-header>
-<main class="main">
-    <section id="team" class="team section">
-        <!-- Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <!-- Search input -->
-            <div class="search-box">
-                <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Search product name..." />
-            </div>
+<br><br><br><br><br>
+
+<div class="container">
+    <!-- Search -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="🔍 Search product name..." />
         </div>
-        <h2 class="price-title">
-            <span class="price-script">Product List With Price</span>
-        </h2>
-        <!-- Product list -->
-        <div class="container">
-            <div class="row gy-4 justify-content-center">
-                <div class="col-lg-10" *ngFor="let product of filteredProducts()" data-aos="fade-up"
-                    [attr.data-aos-delay]="getDelay(product)">
-                    <div class="price-item d-flex justify-content-between align-items-center">
-                        <div class="product-name">{{ product.productname }}</div>
-                        <div class="product-price">{{ product.price }} Br</div> &nbsp;
+    </div>
+    <!-- summary -->
+    <div class="card mt-5 p-4 shadow-sm bg-light">
+        <h4 class="mb-3 text-primary">🛒 Cart Summary</h4>
+
+        <div *ngIf="cart.length > 0; else noItems">
+            <ul class="list-group mb-3">
+                <li *ngFor="let item of cart" class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ item.name }}</strong> — {{ item.quantity }} kg
                     </div>
-                </div>
+                    <span>{{ item.total | number:'1.2-2' }} Br</span>
+                </li>
+            </ul>
+
+            <h5 class="text-end text-success">Total: {{ totalPrice | number:'1.2-2' }} Br</h5>
+
+            <div class="d-flex justify-content-end gap-2 mt-3">
+                <button class="btn btn-outline-danger btn-sm" (click)="clearCart()">🗑️ Clear All</button>
+                <button class="btn btn-outline-warning btn-sm" (click)="undoLast()">↩️ Undo Last</button>
             </div>
         </div>
-    </section>
-</main>
+
+        <ng-template #noItems>
+            <p class="text-muted">No products added yet.</p>
+        </ng-template>
+    </div>
+
+
+    <!-- Product List -->
+    <div class="row gy-4 justify-content-center">
+        <div class="col-lg-10" *ngFor="let product of filteredProducts(); let i = index" data-aos="fade-up"
+            [attr.data-aos-delay]="getDelay(product)">
+            <div class="price-item d-flex justify-content-between align-items-center border-bottom py-2">
+                <div class="product-name fw-bold">{{ product.productname }}</div>
+                <div class="product-price">{{ product.price }} Br</div>
+
+                <input type="number" step="0.25" min="0" [(ngModel)]="selectedQuantities[product.id!]" placeholder="kg"
+                    class="form-control form-control-sm w-25 mx-2" />
+
+                <button class="btn btn-sm btn-primary" (click)="addToCart(product)">➕ Add</button>
+            </div>
+        </div>
+    </div>
+</div>
