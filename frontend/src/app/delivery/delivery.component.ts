@@ -13,17 +13,23 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './delivery.component.css'
 })
 export class DeliveryComponent implements OnInit, OnDestroy {
- products: Product[] = [];
-  private sub$ = new Subject<void>();
+  products: Product[] = [];
   searchTerm: string = '';
   loading = true;
+
+  selectedQuantities: { [productId: number]: number } = {};
+  totalPrice: number = 0;
+
+  cart: { id: number, name: string, quantity: number, total: number }[] = [];
+
+  private sub$ = new Subject<void>();
 
   constructor(
     private apiService: ApiService,
     private message: MessageService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.apiService.getAllProducts().pipe(takeUntil(this.sub$)).subscribe({
@@ -48,59 +54,64 @@ export class DeliveryComponent implements OnInit, OnDestroy {
     return 100 + (index % 4) * 100;
   }
 
-  ngOnDestroy(): void {
-    this.sub$.next();
-    this.sub$.complete();
+  filteredProducts(): Product[] {
+    if (!this.searchTerm.trim()) return this.products;
+    const term = this.searchTerm.toLowerCase();
+    return this.products.filter(p => p.productname.toLowerCase().includes(term));
   }
 
-  removeProduct(id: number) {
-    if (id == null) return; // Guard against undefined
+  addToCart(product: Product): void {
+    const quantity = this.selectedQuantities[product.id!];
 
-    const post = this.products.find((product) => product.id === id);
-
-    if (!post) {
+    if (!quantity || quantity <= 0) {
       this.message.add({
-        severity: 'error',
-        summary: 'Validation Error',
-        detail: 'Product does not exist.',
+        severity: 'warn',
+        summary: 'Invalid Quantity',
+        detail: 'Please enter a valid quantity (e.g., 1, 0.5, 0.25)',
         life: 2000,
       });
       return;
     }
 
-    this.apiService.removeProduct(id).subscribe({
-      next: (res) => {
-        if (res && res.success) {
-          this.products = this.products.filter((p) => p.id !== id);
-          this.message.add({
-            severity: 'success',
-            summary: 'Deleted',
-            detail: 'Product removed successfully.',
-            life: 1500,
-          });
-        } else {
-          this.message.add({
-            severity: 'warn',
-            summary: 'Delete Failed',
-            detail: 'Invalid server response.',
-            life: 2000,
-          });
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        this.message.add({
-          severity: 'error',
-          summary: `Error ${err.status}`,
-          detail: err.statusText || 'Failed to remove product.',
-          life: 2000,
-        });
-      },
+    const productTotal = quantity * product.price;
+
+    this.cart.push({
+      id: product.id!,
+      name: product.productname,
+      quantity: quantity,
+      total: productTotal
+    });
+
+    this.totalPrice += productTotal;
+    this.selectedQuantities[product.id!] = 0;
+  }
+
+  clearCart(): void {
+    this.cart = [];
+    this.totalPrice = 0;
+    this.message.add({
+      severity: 'info',
+      summary: 'Cart Cleared',
+      detail: 'All products removed from cart.',
+      life: 2000
     });
   }
 
-  filteredProducts(): Product[] {
-    if (!this.searchTerm.trim()) return this.products;
-    const term = this.searchTerm.toLowerCase();
-    return this.products.filter(p => p.productname.toLowerCase().includes(term));
+  undoLast(): void {
+    const last = this.cart.pop();
+    if (last) {
+      this.totalPrice -= last.total;
+      this.message.add({
+        severity: 'warn',
+        summary: 'Undo',
+        detail: `${last.name} removed from cart.`,
+        life: 2000
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.next();
+    this.sub$.complete();
   }
 }
