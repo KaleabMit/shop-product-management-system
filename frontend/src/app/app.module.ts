@@ -12,6 +12,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
+import { DeliveryComponent } from './delivery/delivery.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AboutComponent } from './about/about.component';
     FooterComponent,
     HeaderComponent,
     AboutComponent,
+    DeliveryComponent,
   ],
   imports: [
     BrowserModule,

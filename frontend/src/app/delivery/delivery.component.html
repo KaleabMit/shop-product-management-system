@@ -1,0 +1,27 @@
+<app-header></app-header>
+<main class="main">
+    <section id="team" class="team section">
+        <!-- Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <!-- Search input -->
+            <div class="search-box">
+                <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Search product name..." />
+            </div>
+        </div>
+        <h2 class="price-title">
+            <span class="price-script">Product List With Price</span>
+        </h2>
+        <!-- Product list -->
+        <div class="container">
+            <div class="row gy-4 justify-content-center">
+                <div class="col-lg-10" *ngFor="let product of filteredProducts()" data-aos="fade-up"
+                    [attr.data-aos-delay]="getDelay(product)">
+                    <div class="price-item d-flex justify-content-between align-items-center">
+                        <div class="product-name">{{ product.productname }}</div>
+                        <div class="product-price">{{ product.price }} Br</div> &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
