@@ -7,7 +7,8 @@ import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ProductService {
-constructor(@InjectRepository(Product) private readonly repo: Repository<Product>) {}
+  constructor(@InjectRepository(Product)
+  private readonly repo: Repository<Product>) { }
 
   async create(createProductDto: CreateProductDto) {
     return await this.repo.insert(createProductDto);
@@ -30,11 +31,11 @@ constructor(@InjectRepository(Product) private readonly repo: Repository<Product
   }
 
   async remove(id: number): Promise<DeleteResult> {
-    const del= await this.repo.delete(id);
-if(del.affected===0){
-  throw new BadRequestException(`Product ID ${id} is not found`)
-}
-return del;
-    
+    const del = await this.repo.delete(id);
+    if (del.affected === 0) {
+      throw new BadRequestException(`Product ID ${id} is not found`)
+    }
+    return del;
+
   }
 }
