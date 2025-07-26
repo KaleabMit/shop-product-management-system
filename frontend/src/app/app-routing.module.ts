@@ -5,13 +5,15 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AboutComponent } from './about/about.component';
 import { DeliveryComponent } from './delivery/delivery.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: ProductFormComponent },
+   { path: '', component: DeliveryComponent },
+  { path: 'product-form', component: ProductFormComponent },
   { path: 'product-list', component: ProductListComponent },
   { path: 'product/edit/:id', component: ProductEditComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'delivery', component: DeliveryComponent },
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({
