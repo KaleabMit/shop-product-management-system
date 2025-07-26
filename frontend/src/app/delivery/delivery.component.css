@@ -21,3 +21,21 @@ input[type="number"] {
   flex: 1;
 }
 
+
+.card-img-top {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 5px 10px;
+}
+
+.btn-sm {
+  font-size: 0.8rem;
+}

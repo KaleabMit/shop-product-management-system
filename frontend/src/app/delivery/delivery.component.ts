@@ -32,22 +32,29 @@ export class DeliveryComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.getAllProducts().pipe(takeUntil(this.sub$)).subscribe({
-      next: (products) => {
-        this.products = products;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.message.add({
-          severity: 'error',
-          summary: 'Load Error',
-          detail: 'Failed to load products',
-          life: 3000,
-        });
-      },
-    });
-  }
+  this.apiService.getAllProducts().pipe(takeUntil(this.sub$)).subscribe({
+    next: (products) => {
+      this.products = products.map(p => ({
+        ...p,
+        // image: p.image || `https://source.unsplash.com/300x200/?product,tech,${p.id}`,
+        image: p.image || 'rms.jpg',
+        discount: p.discount ?? Math.floor(Math.random() * 30) + 5,
+        rating: p.rating ?? Math.floor(Math.random() * 5) + 1
+      }));
+      this.loading = false;
+    },
+    error: () => {
+      this.loading = false;
+      this.message.add({
+        severity: 'error',
+        summary: 'Load Error',
+        detail: 'Failed to load products',
+        life: 3000,
+      });
+    },
+  });
+}
+
 
   getDelay(product: Product): number {
     const index = this.products.indexOf(product);
