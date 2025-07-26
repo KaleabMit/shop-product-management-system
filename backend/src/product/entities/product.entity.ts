@@ -8,4 +8,10 @@ export class Product {
     productname: string;
     @Column()
     price: number;
+    @Column()
+    image:string;
+    @Column()
+    discount:number;
+    @Column()
+    rating:number;
 }
