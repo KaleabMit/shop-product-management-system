@@ -10,21 +10,18 @@ export class Product {
     productname: string;
     @Column()
     price: number;
-    @Column()
-    image:string;
-    @Column()
-    discount:number;
-    @Column()
-    rating:number;
-
-     @Column()
+    @Column({ nullable: true })
+    image: string;
+    @Column({ nullable: true })
+    discount: number;
+    @Column({ nullable: true })
     @Exclude()
-    categoryId:number;
+    categoryId: number;
 
-    @ManyToOne(()=>Category,(category)=>category.products,{eager:true})
+    @ManyToOne(() => Category, (category) => category.products, { eager: true })
     @JoinColumn({
-    name:'categoryId',
-    referencedColumnName:'id'
-})
-    category:Category;
+        name: 'categoryId',
+        referencedColumnName: 'id'
+    })
+    category: Category;
 }

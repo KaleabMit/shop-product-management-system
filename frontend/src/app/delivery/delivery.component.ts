@@ -39,7 +39,6 @@ export class DeliveryComponent implements OnInit, OnDestroy {
         // image: p.image || `https://source.unsplash.com/300x200/?product,tech,${p.id}`,
         image: p.image || 'rms.jpg',
         discount: p.discount ?? Math.floor(Math.random() * 30) + 5,
-        rating: p.rating ?? Math.floor(Math.random() * 5) + 1
       }));
       this.loading = false;
     },

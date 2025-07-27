@@ -17,8 +17,4 @@ export class CreateProductDto {
     @IsNumber()
     discount: number;
 
-     @IsOptional()
-    @IsNumber()
-    rating: number;
-    
 }

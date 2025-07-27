@@ -4,5 +4,4 @@ export interface Product {
   price: number;
   image?: string;
   discount?: number;
-  rating?: number;
 }
