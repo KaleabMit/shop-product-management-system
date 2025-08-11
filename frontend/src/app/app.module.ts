@@ -15,6 +15,12 @@ import { AboutComponent } from './about/about.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import { ReceiptComponent } from './receipt/receipt.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +34,20 @@ import { CategoryComponent } from './category/category.component';
     DeliveryComponent,
     DashboardComponent,
     CategoryComponent,
+    CheckoutComponent,
+    PaymentStatusComponent,
+    ReceiptComponent,
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule ,
     ToastModule,
+     MatDialogModule,
+    MatButtonModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

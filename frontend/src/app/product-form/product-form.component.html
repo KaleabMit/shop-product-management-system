@@ -1,23 +1,29 @@
-<app-header></app-header>
+<!-- <app-header></app-header>
+
 <div class="container py-5">
   <div class="card shadow-lg border-0 rounded-4">
     <div class="card-body px-5 py-4">
       <h3 class="mb-4 text-center text-primary fw-bold">
         <i class="pi pi-shopping-cart me-2"></i> Add New Product
       </h3>
-
       <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
         <div class="row g-4">
           <div class="col-md-6">
             <label for="inputProductName" class="form-label fw-semibold">Product Name</label>
-            <input class="form-control rounded-3" id="inputProductName" type="text"
-              placeholder="e.g. Mitku Coffee" ngModel name="productname" required />
+            <input class="form-control rounded-3" id="inputProductName" type="text" placeholder="e.g. Mitku Coffee"
+              ngModel name="productname" required />
           </div>
 
           <div class="col-md-6">
             <label for="inputPrice" class="form-label fw-semibold">Product Price</label>
-            <input class="form-control rounded-3" id="inputPrice" type="number"
-              placeholder="e.g. 250" ngModel name="price" required />
+            <input class="form-control rounded-3" id="inputPrice" type="number" placeholder="e.g. 250" ngModel
+              name="price" required />
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputDiscount" class="form-label fw-semibold">Discount</label>
+            <input class="form-control rounded-3" id="inputDiscount" type="number" placeholder="e.g. 50" ngModel
+              name="discount" required />
           </div>
         </div>
 
@@ -27,9 +33,55 @@
           </button>
         </div>
       </form>
+      <div class="mt-5">
+        <h5 class="mb-3 text-primary fw-bold">Product Images</h5>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div class="col" *ngFor="let product of products">
+            <div class="card border-0 shadow-sm h-100">
+              <img [src]="getImageUrl(product)" class="card-img-top" alt="Product Image"
+                style="height: 200px; object-fit: cover;" />
+
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ product.name }}</h6>
+
+                <input type="file" class="form-control mb-2" (change)="onFileSelected($event, product.id)" />
+
+                <button class="btn btn-outline-primary w-100" (click)="uploadImage(product.id)">
+                  <i class="pi pi-upload me-1"></i>Upload Image
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+<app-product-list></app-product-list> -->
+<app-header></app-header>
 
-<!-- Show product list below -->
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+  <input type="text" name="productname" ngModel placeholder="Product Name" required>
+    <input type="text" name="description" ngModel placeholder="description" required>
+  <input type="number" name="price" ngModel placeholder="Price" required>
+  <input type="number" name="discount" ngModel placeholder="Discount">
+  <button type="submit">Add Product</button>
+</form>
+
+<hr>
+
+<div *ngFor="let product of products" class="product-card">
+  <h4>{{ product.productname }}</h4>
+  <p>{{ product.description }}</p>
+  <p>Price: {{ product.price }}</p>
+  <p>Discount: {{ product.discount }}</p>
+
+  <img [src]="getImageUrl(product)" width="200" height="200" alt="Product Image">
+
+  <input type="file" (change)="onFileSelected($event, product.id)">
+  <button (click)="uploadImage(product.id)">Upload Image</button>
+</div>
+
 <app-product-list></app-product-list>

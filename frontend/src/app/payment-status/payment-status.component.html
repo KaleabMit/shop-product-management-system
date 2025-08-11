@@ -1,0 +1,10 @@
+<!-- <div *ngIf="status">
+  <h1>Payment {{ status }}</h1>
+  <p *ngIf="status === 'success'">Thank you! Your payment was successful.</p>
+  <p *ngIf="status !== 'success'">Sorry, your payment failed or was canceled.</p>
+</div> -->
+<div>
+  <h2>Payment Status</h2>
+  <p *ngIf="status === 'success'">🎉 Payment Successful!</p>
+  <p *ngIf="status !== 'success'">⚠️ Payment Failed or Cancelled.</p>
+</div>

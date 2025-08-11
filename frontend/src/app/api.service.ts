@@ -41,4 +41,21 @@ export class ApiService {
       withCredentials: true
     });
   }
+
+  uploadProductImage(id: string | number, file: File): Observable<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  return this.http.post(`${this.URL}/product/${id}/upload`, formData, {
+    withCredentials: true
+  });
+}
+
+initializePayment(paymentData: any): Observable<any> {
+  return this.http.post(`${this.URL}/payments/initialize`, paymentData);
+}
+verifyPayment(tx_ref: string): Observable<any> {
+  return this.http.get<any>(`${this.URL}/payments/verify/${tx_ref}`);
+}
+
+
 }

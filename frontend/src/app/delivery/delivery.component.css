@@ -39,3 +39,50 @@ input[type="number"] {
 .btn-sm {
   font-size: 0.8rem;
 }
+
+/* category style */
+.category-sidebar {
+  width: 240px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.category-header:hover {
+  background: #f9f9f9;
+}
+
+.category-list {
+  display: none;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.category-sidebar:hover .category-list {
+  display: block;
+}
+
+/* quick view */
+.modal {
+  z-index: 1050;
+}
+
+.modal-backdrop {
+  opacity: 0.5 !important;
+}

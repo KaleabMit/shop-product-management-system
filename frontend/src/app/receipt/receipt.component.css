@@ -1,0 +1,115 @@
+.invoice-container {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.paid-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-20deg);
+  color: rgba(255, 0, 0, 0.6);
+  font-size: 80px;
+  font-weight: bold;
+  border: 5px solid rgba(255, 0, 0, 0.6);
+  padding: 10px 30px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.invoice-section {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.invoice-col {
+  width: 48%;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.invoice-actions {
+  text-align: right;
+}
+
+.home-actions {
+  text-align: left;
+}
+
+button {
+  background: #99a4b0;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.loading,
+.error {
+  text-align: center;
+  margin: 20px;
+  font-weight: bold;
+}
+
+/* Print-friendly */
+@media print {
+  button {
+    display: none;
+  }
+}
+.invoice-container {
+  position: relative; /* allows absolute positioning of the stamp */
+}
+
+
+/* Center stamp overlay */
+.stamp-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.2;
+  width: 150px;
+  pointer-events: none;
+}
+
+/* Hide elements when printing/PDF */
+@media print {
+  .non-printable {
+    display: none !important;
+  }
+}

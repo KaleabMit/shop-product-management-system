@@ -4,7 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ApiService } from '../api.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { CartItem, CartService } from '../cart.service';
 
 @Component({
   selector: 'app-delivery',
@@ -13,14 +13,17 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './delivery.component.css'
 })
 export class DeliveryComponent implements OnInit, OnDestroy {
+   selectedProduct: Product | null = null;
+  showQuickView: boolean = false;
+
   products: Product[] = [];
   searchTerm: string = '';
   loading = true;
 
   selectedQuantities: { [productId: number]: number } = {};
-  totalPrice: number = 0;
 
-  cart: { id: number, name: string, quantity: number, total: number }[] = [];
+  cart: CartItem[] = [];
+  totalPrice: number = 0;
 
   private sub$ = new Subject<void>();
 
@@ -28,42 +31,39 @@ export class DeliveryComponent implements OnInit, OnDestroy {
     private apiService: ApiService,
     private message: MessageService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cartService: CartService  // <-- Inject CartService
+  ) { }
 
   ngOnInit(): void {
-  this.apiService.getAllProducts().pipe(takeUntil(this.sub$)).subscribe({
-    next: (products) => {
-      this.products = products.map(p => ({
-        ...p,
-        // image: p.image || `https://source.unsplash.com/300x200/?product,tech,${p.id}`,
-        image: p.image || 'rms.jpg',
-        discount: p.discount ?? Math.floor(Math.random() * 30) + 5,
-      }));
-      this.loading = false;
-    },
-    error: () => {
-      this.loading = false;
-      this.message.add({
-        severity: 'error',
-        summary: 'Load Error',
-        detail: 'Failed to load products',
-        life: 3000,
-      });
-    },
-  });
-}
+    this.apiService.getAllProducts().pipe(takeUntil(this.sub$)).subscribe({
+      next: (products) => {
+        this.products = products.map(p => ({
+          ...p,
+          image: p.image || 'rms.jpg',
+          discount: p.discount ?? Math.floor(Math.random() * 30) + 5,
+        }));
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+        this.message.add({
+          severity: 'error',
+          summary: 'Load Error',
+          detail: 'Failed to load products',
+          life: 3000,
+        });
+      },
+    });
 
+    // Subscribe to cart and total from CartService
+    this.cartService.cartItems$.pipe(takeUntil(this.sub$)).subscribe(cart => {
+      this.cart = cart;
+    });
 
-  getDelay(product: Product): number {
-    const index = this.products.indexOf(product);
-    return 100 + (index % 4) * 100;
-  }
-
-  filteredProducts(): Product[] {
-    if (!this.searchTerm.trim()) return this.products;
-    const term = this.searchTerm.toLowerCase();
-    return this.products.filter(p => p.productname.toLowerCase().includes(term));
+    this.cartService.totalPrice$.pipe(takeUntil(this.sub$)).subscribe(total => {
+      this.totalPrice = total;
+    });
   }
 
   addToCart(product: Product): void {
@@ -81,20 +81,26 @@ export class DeliveryComponent implements OnInit, OnDestroy {
 
     const productTotal = quantity * product.price;
 
-    this.cart.push({
+    // Use CartService to add item
+    this.cartService.addToCart({
       id: product.id!,
       name: product.productname,
-      quantity: quantity,
+      quantity,
       total: productTotal
     });
 
-    this.totalPrice += productTotal;
     this.selectedQuantities[product.id!] = 0;
+
+    this.message.add({
+      severity: 'success',
+      summary: 'Added',
+      detail: `${product.productname} added to cart.`,
+      life: 1500,
+    });
   }
 
   clearCart(): void {
-    this.cart = [];
-    this.totalPrice = 0;
+    this.cartService.clearCart();
     this.message.add({
       severity: 'info',
       summary: 'Cart Cleared',
@@ -104,20 +110,46 @@ export class DeliveryComponent implements OnInit, OnDestroy {
   }
 
   undoLast(): void {
-    const last = this.cart.pop();
-    if (last) {
-      this.totalPrice -= last.total;
-      this.message.add({
-        severity: 'warn',
-        summary: 'Undo',
-        detail: `${last.name} removed from cart.`,
-        life: 2000
-      });
-    }
+    this.cartService.undoLast();
+    this.message.add({
+      severity: 'warn',
+      summary: 'Undo',
+      detail: `Last item removed from cart.`,
+      life: 2000
+    });
   }
 
   ngOnDestroy(): void {
     this.sub$.next();
     this.sub$.complete();
   }
+
+  getDelay(product: Product): number {
+    const index = this.products.indexOf(product);
+    return 100 + (index % 4) * 100;
+  }
+
+  filteredProducts(): Product[] {
+    if (!this.searchTerm.trim()) return this.products;
+    const term = this.searchTerm.toLowerCase();
+    return this.products.filter(p => p.productname.toLowerCase().includes(term));
+  }
+
+  getImageUrl(product: Product): string {
+    if (product.image && product.image.startsWith('http')) {
+      return product.image;
+    }
+    return 'https://res.cloudinary.com/duinnjdn6/image/upload/v1754530586/KMB_wkfjig.jpg';
+  }
+
+  openQuickView(product: Product): void {
+    this.selectedProduct = product;
+    this.showQuickView = true;
+  }
+
+  closeQuickView(): void {
+    this.selectedProduct = null;
+    this.showQuickView = false;
+  }
+  
 }

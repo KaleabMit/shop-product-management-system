@@ -7,6 +7,9 @@ import { AboutComponent } from './about/about.component';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
+import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ReceiptComponent } from './receipt/receipt.component';
 
 const routes: Routes = [
    { path: '', component: DeliveryComponent },
@@ -16,6 +19,12 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'category', component: CategoryComponent },
+  { path: 'payment-status/', component: PaymentStatusComponent },
+    { path: 'checkout', component: CheckoutComponent },
+     { path: 'receipt', component: ReceiptComponent },
+    
+  
+  
 ];
 
 @NgModule({

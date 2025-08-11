@@ -1,0 +1,29 @@
+div {
+  padding: 12px 18px;
+  margin: 8px 0;
+  border-radius: 8px;
+  font-size: 17px;
+  font-family: "Times New Roman", Times, serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #333;
+  background-color: #fff8e1; /* soft warm cream */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Different background colors per category */
+div:nth-child(1) { background-color: #FFD54F; color: #5D4037; } /* Grains & Pulses - golden yellow / brown text */
+div:nth-child(2) { background-color: #A5D6A7; color: #1B5E20; } /* Daily Essentials - soft green / dark green text */
+div:nth-child(3) { background-color: #4FC3F7; color: #01579B; } /* Beverages - light blue / navy blue text */
+div:nth-child(4) { background-color: #EF9A9A; color: #B71C1C; } /* Spices & Condiments - light red / dark red text */
+div:nth-child(5) { background-color: #CE93D8; color: #4A148C; } /* Pasta & Flour - light purple / deep purple text */
+div:nth-child(6) { background-color: #FFCC80; color: #E65100; } /* Snacks & Candy - light orange / burnt orange text */
+div:nth-child(7) { background-color: #FFF59D; color: #F57F17; } /* Tea & Coffee - light yellow / gold text */
+div:nth-child(8) { background-color: #B2DFDB; color: #004D40; } /* Vegetables - mint / deep teal text */
+
+/* Hover effect */
+div:hover {
+  filter: brightness(1.1);
+  color: #000;
+  font-weight: 600;
+}

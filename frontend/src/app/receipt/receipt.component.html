@@ -1,0 +1,76 @@
+<div *ngIf="loading" class="loading">Loading receipt...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div *ngIf="paymentData" class="invoice-container" id="invoice">
+  <div class="invoice-header">
+    <h2>KaleabKMB</h2>
+    <div class="invoice-meta">
+      <p><strong>Order #</strong> {{ paymentData.tx_ref }}</p>
+      <p><strong>Date:</strong> {{ paymentData.date | date:'mediumDate' }}</p>
+    </div>
+  </div>
+
+  <!-- ✅ Paid stamp overlay -->
+  <img 
+    *ngIf="paymentData.status === 'success'" 
+    src="https://res.cloudinary.com/duinnjdn6/image/upload/v1754919429/mitku_shopping_plc_stamp_cgfy6r.png" 
+    alt="Paid Stamp" 
+    class="stamp-overlay">
+
+  <div class="invoice-section">
+    <div class="invoice-col">
+      <h4>Billed To:</h4>
+      <p>Full Name: {{ paymentData.first_name }} {{ paymentData.last_name }}</p>
+      <p>Address: {{ paymentData.address }}</p>
+      <p>Email: {{ paymentData.email }}</p>
+    </div>
+    <div class="invoice-col">
+      <h4>Payment Status</h4>
+      <p>{{ paymentData.status }}</p>
+      <p>{{ paymentData.currency }} {{ paymentData.amount }}</p>
+    </div>
+  </div>
+
+  <table class="invoice-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Totals</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paymentData.items">
+        <td>{{ item.name }}</td>
+        <td>{{ item.total | number:'1.2-2' }} Br</td>
+        <td>{{ item.quantity }} kg</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="text-right"><strong>Total</strong></td>
+        <td><strong>{{ paymentData.amount | currency:paymentData.currency }}</strong></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="text-right"><strong>Shipping</strong></td>
+        <td>Delivered</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- ❌ Back and download buttons REMOVED from printed version -->
+<div class="non-printable">
+  <div class="home-actions">
+    <button routerLink="/">
+      <img src="https://img.icons8.com/ios-filled/50/000000/circled-left-2.png" 
+           alt="Back" 
+           style="width: 24px; height: 24px; vertical-align: middle;">
+    </button>
+  </div>
+
+  <div class="invoice-actions">
+    <button (click)="downloadReceipt()">Download Receipt</button>
+  </div>
+</div>

@@ -8,6 +8,8 @@ export class Product {
     id: number;
     @Column()
     productname: string;
+     @Column()
+    description: string;
     @Column()
     price: number;
     @Column({ nullable: true })
