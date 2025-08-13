@@ -21,10 +21,9 @@ import { roles } from './user-roles';
     UserService,
     {
       provide: RolesBuilder,
-      useValue: roles, // ✅ provide RolesBuilder
+      useValue: roles, 
     },
-    // ❌ remove ACGuard from here
   ],
-  exports: [UserService, RolesBuilder], // ✅ export RolesBuilder
+  exports: [UserService, RolesBuilder], 
 })
 export class UserModule {}

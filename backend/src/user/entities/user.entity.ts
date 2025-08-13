@@ -1,7 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserRoles } from "../user-roles";
+import { UserRoles } from '../user-roles';
+import { Order } from 'src/payments/entities/payment.entity';
 
 @Entity('users')
 export class User {
@@ -37,7 +44,7 @@ export class User {
 
   @Column({ default: null })
   linkedin: string;
-  
+
   @Column({ default: null })
   twitter: string;
 
@@ -46,9 +53,11 @@ export class User {
     enum: UserRoles,
     default: UserRoles.Reader,
   })
+
+  @OneToOne(() => Order, (order) => order.userId)
+  order: Order[];
+
   roles: UserRoles;
-
-
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);
