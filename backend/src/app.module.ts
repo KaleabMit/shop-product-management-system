@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // import { Module } from '@nestjs/common'; 
 // import { ProductModule } from './product/product.module';
 // import { ConfigModule } from '@nestjs/config';
@@ -39,6 +40,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CategoryModule } from './category/category.module';
 import { PaymentsModule } from './payments/payments.module';
+import { UserModule } from './user/user.module';
+import { AccessControlModule } from 'nest-access-control';
+import { roles } from './user/user-roles';
 
 @Module({
   imports: [
@@ -58,6 +62,8 @@ import { PaymentsModule } from './payments/payments.module';
     ProductModule,
     CategoryModule,
     PaymentsModule,
+    UserModule,
+    AccessControlModule.forRoles(roles),
   ],
   controllers: [AppController],
   providers: [AppService],

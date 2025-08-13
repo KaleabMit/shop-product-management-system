@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Exclude } from "class-transformer";
 import { Category } from "src/category/entities/category.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";

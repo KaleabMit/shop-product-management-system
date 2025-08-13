@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -8,7 +9,7 @@ async function bootstrap() {
 
   // Allow requests from your Angular app
   app.enableCors({
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'http://localhost:4300'],
     credentials: true,
   });
 

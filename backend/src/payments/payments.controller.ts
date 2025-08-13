@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Param, Res } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 
 @Controller('payments')

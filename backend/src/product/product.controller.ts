@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -5,7 +6,6 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { v2 as cloudinary } from 'cloudinary';
 import { Readable } from 'stream';
-import type { File as MulterFile } from 'multer';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -46,7 +46,7 @@ export class ProductController {
 @UseInterceptors(FileInterceptor('image'))
 async uploadImage(
   @Param('id') id: string,
-  @UploadedFile() file: MulterFile,
+  @UploadedFile() file: Express.Multer.File,
 ) {
   const streamUpload = () => {
     return new Promise<{ url: string }>((resolve, reject) => {

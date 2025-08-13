@@ -21,6 +21,9 @@ import { RouterModule } from '@angular/router';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { ReceiptComponent } from './receipt/receipt.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { ReceiptComponent } from './receipt/receipt.component';
     CheckoutComponent,
     PaymentStatusComponent,
     ReceiptComponent,
+    SignupComponent,
+    LoginComponent,
+    MainComponent,
     
   ],
   imports: [
@@ -47,7 +53,8 @@ import { ReceiptComponent } from './receipt/receipt.component';
     HttpClientModule ,
     ToastModule,
      MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    ToastModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

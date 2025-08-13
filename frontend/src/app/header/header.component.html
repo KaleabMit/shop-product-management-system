@@ -19,22 +19,38 @@
                 </ul>
             </nav>
 
-            <!-- Search + Profile Section -->
-            <div class="header-right d-flex align-items-center">
+              <!-- User Section -->
+      <div class="d-flex align-items-center ms-3">
+        <ng-container *ngIf="isLoggedIn(); else guestLinks">
+          <div class="dropdown">
+            <a class="d-flex align-items-center dropdown-toggle text-decoration-none" href="#" role="button" id="userDropdown"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="" class="rounded-circle me-2"
+                   style="width: 30px; height: 30px;" alt="User Photo">
+              <span class="text-white">{{ user.username }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" routerLink="/main">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+        </ng-container>
 
-                <!-- User Dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-
-                        <li><a class="dropdown-item" href="#">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                    </ul>
-                </div>
-            </div>
+        <!-- Guest Links -->
+        <ng-template #guestLinks>
+          <div class="dropdown">
+            <a class="btn btn-outline-light dropdown-toggle" href="#" id="guestDropdown" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="guestDropdown">
+              <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+              <li><a class="dropdown-item" routerLink="/signup">Sign Up</a></li>
+            </ul>
+          </div>
+        </ng-template>
+      </div>
 
         </div>
     </header>

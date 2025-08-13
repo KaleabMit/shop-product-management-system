@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
@@ -18,7 +19,7 @@ export class Order {
   @Column()
   last_name: string;
 
-  @Column('json') // store items as JSON
+  @Column('json') 
   items: { name: string; price: number; quantity: number; total: number }[];
 
   @Column('decimal')

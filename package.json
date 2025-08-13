@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "concurrently": "^9.2.0"
   },
   "dependencies": {
+    "@nestjs/jwt": "^11.0.0",
     "@nestjs/platform-express": "^11.1.5",
+    "bcrypt": "^6.0.0",
     "cloudinary": "^1.41.3",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0"
   }
