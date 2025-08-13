@@ -1,0 +1,77 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark sticky-top " >
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+   <a class="navbar-brand ps-3" href="index.html">Mitku Shopping PLC</a>
+   <nav class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+   <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+       <li class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <!-- <i class="fas fa-user fa-fw"></i> -->
+               <div class="col-lg-3" *ngIf="user">
+                   <h2 class="card-title h4"><strong>{{user.firstname}}</strong></h2>
+             </div>
+           </a>
+           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+               <li><a class="dropdown-item">Upcoming Feature</a></li>
+               <li><a class="dropdown-item">...</a></li>
+               <li><hr class="dropdown-divider" /></li>
+               <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+           </ul>
+       </li>
+   </ul>
+</nav>
+</nav>
+
+<div id="layoutSidenav" >
+   <div id="layoutSidenav_nav">
+       <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+           <div class="sb-sidenav-menu">
+               <div class="nav">
+
+                   <a class="nav-link" routerLink="/profile">
+                   <div class="sb-nav-link-icon"><i class="fa fa-user text-primary me-2"></i></div>My Profile </a>
+                   <a class="nav-link" routerLink="/notification">
+                   <div class="sb-nav-link-icon"><i class="fa fa-chart-bar text-primary me-2"></i></div>Notifications</a>
+                   <a class="nav-link" routerLink="/bookclub">
+                    <div class="sb-nav-link-icon"><i class="fa fa-chart-bar text-primary me-2"></i></div>BookClub</a>
+                   <a class="nav-link" routerLink="/activity">
+                   <div class="sb-nav-link-icon"><i class="fa fa-heart text-primary me-2"></i></div>Activity</a>
+                   <a class="nav-link" routerLink="/profile">
+                   <div class="sb-nav-link-icon"><i class="fa fa-user-edit text-primary me-2"></i></div>Change Profile</a>
+
+                   <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                       <div class="sb-nav-link-icon"><i class="fas fa-columns text-primary me-2"></i></div>
+                       Upcoming Features
+                       <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                   </a>
+                   <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                       <nav class="sb-sidenav-menu-nested nav">
+                           
+    <button class="flex-fill text-center py-2"><i class="fa fa-chalkboard text-primary me-2"></i>Dashboard</button>
+    <button class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>My Profile</button>
+    <button routerLink="/posts/" class="flex-fill text-center py-2"><i class="fa fa-envelope text-primary me-2"></i>Messages</button>
+    <button class="flex-fill text-center py-2"><i class="fa fa-chart-bar text-primary me-2"></i>Insights</button>
+    <button routerLink="/posts/create" class="flex-fill text-center py-2"><i class="fa fa-heart text-primary me-2"></i>Favorites</button>
+    <button class="flex-fill text-center py-2"><i class="fa fa-calendar-check text-primary me-2"></i>Bookings</button>
+    <button class="flex-fill text-center py-2"><i class="fa fa-user-edit text-primary me-2"></i>Change Profile</button>
+    <button class="flex-fill text-center py-2"><i class="fa fa-key text-primary me-2"></i>Change PIN</button>
+    <button routerLink="/posts/categories" class="flex-fill text-center py-2"><i class="fa fa-language text-primary me-2"></i>Languages</button>
+    <button mat-button class="add-property" (click)="logout()" style="text-align: center;"><strong>Log Out</strong></button>
+                       </nav>
+                   </div>
+               </div>
+           </div>
+           <div class="sb-sidenav-footer">
+               <div class="small">Logged in as:</div>
+               <div class="col-lg-3" *ngIf="user">
+                   <h2 class="card-title h4"><strong>{{user.roles}}</strong></h2>
+             </div>
+           </div>
+       </nav>
+   </div>
+   <div id="layoutSidenav_content">
+       <main>
+           <router-outlet></router-outlet>
+    </main>
+     
+   </div>
+</div>
